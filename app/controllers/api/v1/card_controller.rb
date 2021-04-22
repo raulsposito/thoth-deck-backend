@@ -4,7 +4,7 @@ module Api
       before_action :set_card, only: [:show]
 
       def index
-        @cards = Card.all
+        filtered_cards
         render json: @cards
       end
     
@@ -13,6 +13,13 @@ module Api
       end
 
       private 
+
+      def filtered_cards
+        @cards = Card.all
+        cards = cards.index if params[:index].present?
+        cards = cards.title if params[:title].present?
+        cards = cards.search_input(params[:query]) if params[:query].present?
+      end
 
       def set_card
         @card = Card.find(params[:index])
