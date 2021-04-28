@@ -22,7 +22,7 @@ module Api
       end
 
       def set_card
-        @card = Card.find(params[:index])
+        @card = Card.find(params[:id])
       end
 
       def card_params
