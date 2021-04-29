@@ -16,9 +16,7 @@ module Api
 
       def filtered_cards
         @cards = Card.all
-        cards = cards.index if params[:index].present?
-        cards = cards.title if params[:title].present?
-        cards = cards.search_input(params[:query]) if params[:query].present?
+        @cards = Card.search_input(params[:query]) if params[:query].present?
       end
 
       def set_card
